@@ -681,6 +681,8 @@ int getCost(int cardNumber)
     return -1;
 }
 
+// Adds an estate card to the current player's hand, if there are any left
+// If no estate cards are left, check if the game is over based on the gameover conditions
 void gainEstateCard(struct gameState *state, int currentPlayer)
 {
     if (supplyCount(estate, state) > 0) {
@@ -691,6 +693,11 @@ void gainEstateCard(struct gameState *state, int currentPlayer)
             isGameOver(state);
         }
     }
+}
+
+// Helper function to check if the current card in the player's hand is a specific kind of card
+int isCard(struct gameState *state, int currentPlayer, int position, enum CARD card) {
+    return state->hand[currentPlayer][position] = card;
 }
 
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
@@ -906,7 +913,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
             int p = 0;//Iterator for hand!
             int card_not_discarded = 1;//Flag for discard set!
             while(card_not_discarded) {
-                if (state->hand[currentPlayer][p] == estate) { //Found an estate card!
+                if (isCard(state, currentPlayer, p, estate)) { //Found an estate card!
                     state->coins += 4;//Add 4 coins to the amount of coins
                     state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
                     state->discardCount[currentPlayer]++;
@@ -918,6 +925,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
                     card_not_discarded = 0;//Exit the loop
                 }
                 else if (p > state->handCount[currentPlayer]) {
+                    // We've looped through all cards and there are no estate cards to be played
                     if(DEBUG) {
                         printf("No estate cards in your hand, invalid choice\n");
                         printf("Must gain an estate if there are any\n");
