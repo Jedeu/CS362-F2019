@@ -681,6 +681,18 @@ int getCost(int cardNumber)
     return -1;
 }
 
+void gainEstateCard(struct gameState *state, int currentPlayer)
+{
+    if (supplyCount(estate, state) > 0) {
+        gainCard(estate, state, 0, currentPlayer);//Gain an estate
+
+        state->supplyCount[estate]--;//Decrement Estates
+        if (supplyCount(estate, state) == 0) {
+            isGameOver(state);
+        }
+    }
+}
+
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
 {
     int i;
@@ -910,14 +922,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
                         printf("No estate cards in your hand, invalid choice\n");
                         printf("Must gain an estate if there are any\n");
                     }
-                    if (supplyCount(estate, state) > 0) {
-                        gainCard(estate, state, 0, currentPlayer);
-
-                        state->supplyCount[estate]--;//Decrement estates
-                        if (supplyCount(estate, state) == 0) {
-                            isGameOver(state);
-                        }
-                    }
+                    gainEstateCard(state, currentPlayer);
                     card_not_discarded = 0;//Exit the loop
                 }
 
@@ -928,14 +933,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         }
 
         else {
-            if (supplyCount(estate, state) > 0) {
-                gainCard(estate, state, 0, currentPlayer);//Gain an estate
-
-                state->supplyCount[estate]--;//Decrement Estates
-                if (supplyCount(estate, state) == 0) {
-                    isGameOver(state);
-                }
-            }
+            gainEstateCard(state, currentPlayer);
         }
 
 
