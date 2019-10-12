@@ -696,8 +696,8 @@ void gainEstateCard(struct gameState *state, int currentPlayer)
 }
 
 // Helper function to check if the current card in the player's hand is a specific kind of card
-int isCard(struct gameState *state, int currentPlayer, int position, enum CARD card) {
-    return state->hand[currentPlayer][position] = card;
+int isCard(int current_card, enum CARD card) {
+    return current_card = card;
 }
 
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
@@ -913,15 +913,22 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
             int p = 0;//Iterator for hand!
             int card_not_discarded = 1;//Flag for discard set!
             while(card_not_discarded) {
-                if (isCard(state, currentPlayer, p, estate)) { //Found an estate card!
+                int current_card = state->hand[currentPlayer][p];
+                if (isCard(current_card, estate)) {
                     state->coins += 4;//Add 4 coins to the amount of coins
-                    state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
+
+                    // TODO: This logic is fishy and looks very similar to discardCard except that it doesn't
+                    // add the current card to the played pile
+                    // Fixing discardCard (if needed) is not within the scope of Assignment 2, 
+                    // so I'm purposely not refactoring this for now
+                    state->discard[currentPlayer][state->discardCount[currentPlayer]] = current_card;
                     state->discardCount[currentPlayer]++;
                     for (; p < state->handCount[currentPlayer]; p++) {
-                        state->hand[currentPlayer][p] = state->hand[currentPlayer][p+1];
+                        current_card = state->hand[currentPlayer][p+1];
                     }
                     state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
                     state->handCount[currentPlayer]--;
+
                     card_not_discarded = 0;//Exit the loop
                 }
                 else if (p > state->handCount[currentPlayer]) {
