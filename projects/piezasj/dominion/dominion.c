@@ -685,7 +685,7 @@ int getCost(int cardNumber)
 // If no estate cards are left, check if the game is over based on the gameover conditions
 void gainEstateCard(struct gameState *state, int currentPlayer)
 {
-    if (supplyCount(estate, state) > 0) {
+    if (supplyCount(estate, state) >= 0) {
         gainCard(estate, state, 0, currentPlayer);//Gain an estate
 
         state->supplyCount[estate]--;//Decrement Estates
