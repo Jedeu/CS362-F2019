@@ -142,4 +142,8 @@ void moveTopTwoCardsToTribute(int tributeRevealedCards[], struct gameState *stat
 
 void evaluateTributeCards(int tributeRevealedCards[], int currentPlayer, struct gameState *state);
 
+int handleMineEffect(struct gameState *state, int currentPlayer, int cardToTrash, int desiredCard, int handPos);
+
+int validateMiningChoices(int cardInHand, int desiredCard);
+
 #endif
