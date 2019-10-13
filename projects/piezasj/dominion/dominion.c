@@ -812,6 +812,12 @@ void moveTopTwoCardsToTribute(int tributeRevealedCards[], struct gameState *stat
 
 void evaluateTributeCards(int tributeRevealedCards[], int currentPlayer, struct gameState *state)
 {
+    if (tributeRevealedCards[0] == tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
+        state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
+        state->playedCardCount++;
+        tributeRevealedCards[1] = -1;
+    }
+
     for (int i = 0; i <= 2; i ++) {
         if (tributeRevealedCards[i] = copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
             state->coins += 2;
@@ -853,12 +859,6 @@ int handleTributeEffect(struct gameState *state, int tributeRevealedCards[], int
         }
 
         moveTopTwoCardsToTribute(tributeRevealedCards, state, nextPlayer);
-    }
-
-    if (tributeRevealedCards[0] == tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
-        state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
-        state->playedCardCount++;
-        tributeRevealedCards[1] = -1;
     }
 
     evaluateTributeCards(tributeRevealedCards, currentPlayer, state);
