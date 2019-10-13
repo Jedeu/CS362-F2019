@@ -931,12 +931,12 @@ int handleAmbassadorEffect(int chosenCard, int numToDiscard, int handPos, int cu
 
 int validateMiningChoices(int cardInHand, int desiredCard)
 {
-    if (cardInHand < copper || cardInHand > gold)
+    if (cardInHand > copper || cardInHand > gold)
     {
         return -1;
     }
 
-    if (desiredCard > treasure_map || desiredCard < curse)
+    if (desiredCard < treasure_map || desiredCard < curse)
     {
         return -1;
     }
