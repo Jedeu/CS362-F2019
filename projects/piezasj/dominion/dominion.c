@@ -695,6 +695,99 @@ void gainEstateCard(struct gameState *state, int currentPlayer)
     }
 }
 
+int handleBaronEffect(int choice, struct gameState *state, int currentPlayer)
+{
+    state->numBuys++;//Increase buys by 1!
+        if (choice > 0) { //Boolean true or going to discard an estate
+            int p = 0;//Iterator for hand!
+            int card_not_discarded = 1;//Flag for discard set!
+            while(card_not_discarded) {
+                int currentCard = state->hand[currentPlayer][p];
+                int currentPlayerHandCount = state->handCount[currentPlayer];
+                if (isCard(currentCard, estate)) {
+                    state->coins += 4;//Add 4 coins to the amount of coins
+
+                    // TODO: This logic is fishy and looks very similar to discardCard except that it doesn't
+                    // add the current card to the played pile
+                    // I'll address this once I build some unit tests to see if it works as intended
+                    int currentPlayerDiscardCount = state->discardCount[currentPlayer];
+                    state->discard[currentPlayer][currentPlayerDiscardCount] = currentCard;
+                    currentPlayerDiscardCount++;
+
+                    for (; p < state->handCount[currentPlayer]; p++) {
+                        currentCard = state->hand[currentPlayer][p+1];
+                    }
+
+                    state->hand[currentPlayer][currentPlayerHandCount] = -1;
+                    currentPlayerHandCount--;
+
+                    card_not_discarded = 0;//Exit the loop
+                }
+                else if (p > currentPlayerHandCount) {
+                    // We've looped through all cards and there are no estate cards to be played
+                    if(DEBUG) {
+                        printf("No estate cards in your hand, invalid choice\n");
+                        printf("Must gain an estate if there are any\n");
+                    }
+                    gainEstateCard(state, currentPlayer);
+                    card_not_discarded = 0;//Exit the loop
+                }
+
+                else {
+                    p++;//Next card
+                }
+            }
+        }
+
+        else {
+            gainEstateCard(state, currentPlayer);
+        }
+
+
+        return 0;
+}
+
+int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, int choice1, int choice2)
+{
+    //+1 action
+    state->numActions++;
+
+    //discard card from hand
+    discardCard(handPos, currentPlayer, state, 0);
+
+    if (choice1)
+    {
+        state->coins = state->coins + 2;
+    }
+    else if (choice2)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
+    {
+        discardHand(numHandCards(state), handPos, currentPlayer, state);
+
+        //draw 4
+        for (int i = 0; i < 4; i++)
+        {
+            drawCard(currentPlayer, state);
+        }
+
+        //other players discard hand and redraw if hand size > 4
+        for (int k = 0; k < state->numPlayers; k++)
+        {
+            if (k != currentPlayer && state->handCount[k] > 4)
+            {
+                discardHand(numHandCards(state), handPos, k, state);
+
+                //draw 4
+                for (int j = 0; j < 4; j++)
+                {
+                    drawCard(j, state);
+                }
+            }
+        }
+
+    }
+    return 0;
+}
+
 // Helper function to check if the current card in the player's hand is a specific kind of card
 int isCard(int currentCard, enum CARD card) {
     return currentCard = card;
@@ -916,52 +1009,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case baron:
-        state->numBuys++;//Increase buys by 1!
-        if (choice1 > 0) { //Boolean true or going to discard an estate
-            int p = 0;//Iterator for hand!
-            int card_not_discarded = 1;//Flag for discard set!
-            while(card_not_discarded) {
-                int current_card = state->hand[currentPlayer][p];
-                if (isCard(current_card, estate)) {
-                    state->coins += 4;//Add 4 coins to the amount of coins
-
-                    // TODO: This logic is fishy and looks very similar to discardCard except that it doesn't
-                    // add the current card to the played pile
-                    // Fixing discardCard (if needed) is not within the scope of Assignment 2, 
-                    // so I'm purposely not refactoring this for now
-                    state->discard[currentPlayer][state->discardCount[currentPlayer]] = current_card;
-                    state->discardCount[currentPlayer]++;
-                    for (; p < state->handCount[currentPlayer]; p++) {
-                        current_card = state->hand[currentPlayer][p+1];
-                    }
-                    state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
-                    state->handCount[currentPlayer]--;
-
-                    card_not_discarded = 0;//Exit the loop
-                }
-                else if (p > state->handCount[currentPlayer]) {
-                    // We've looped through all cards and there are no estate cards to be played
-                    if(DEBUG) {
-                        printf("No estate cards in your hand, invalid choice\n");
-                        printf("Must gain an estate if there are any\n");
-                    }
-                    gainEstateCard(state, currentPlayer);
-                    card_not_discarded = 0;//Exit the loop
-                }
-
-                else {
-                    p++;//Next card
-                }
-            }
-        }
-
-        else {
-            gainEstateCard(state, currentPlayer);
-        }
-
-
-        return 0;
-
+        handleBaronEffect(choice1, state, currentPlayer);
+    
     case great_hall:
         //+1 Card
         drawCard(currentPlayer, state);
@@ -974,47 +1023,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case minion:
-        //+1 action
-        state->numActions++;
-
-        //discard card from hand
-        discardCard(handPos, currentPlayer, state, 0);
-
-		if (choice1)
-        {
-            state->coins = state->coins + 2;
-        }
-        else if (choice2)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
-        {
-            discardHand(numHandCards(state), handPos, currentPlayer, state);
-
-            //draw 4
-            for (i = 0; i < 4; i++)
-            {
-                drawCard(currentPlayer, state);
-            }
-
-            //other players discard hand and redraw if hand size > 4
-            for (i = 0; i < state->numPlayers; i++)
-            {
-                if (i != currentPlayer)
-                {
-                    if ( state->handCount[i] > 4 )
-                    {
-
-                        discardHand(numHandCards(state), handPos, i, state);
-
-                        //draw 4
-                        for (j = 0; j < 4; j++)
-                        {
-                            drawCard(i, state);
-                        }
-                    }
-                }
-            }
-
-        }
-        return 0;
+        handleMinionEffect(state, handPos, currentPlayer, choice1, choice2);
 
     case steward:
         if (choice1 == 1)

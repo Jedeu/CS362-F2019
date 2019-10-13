@@ -130,4 +130,8 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state);
 
 void gainEstateCard(struct gameState *state, int currentPlayer);
 
+int handleBaronEffect(int choice, struct gameState *state, int currentPlayer);
+
+int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, int choice1, int choice2);
+
 #endif
