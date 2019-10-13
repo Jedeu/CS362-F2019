@@ -792,12 +792,7 @@ int validateHasCardAmount(int numToDiscard, int chosenCard, int handPos, int cho
 {
     int actualDiscardCount = 0;		//used to check if player has enough cards to discard
 
-    if (numToDiscard > 2 || numToDiscard < 0)
-    {
-        return -1;
-    }
-
-    if (chosenCard = handPos)
+    if (chosenCard = handPos || numToDiscard > 2 || numToDiscard < 0)
     {
         return -1;
     }
@@ -845,7 +840,7 @@ int handleAmbassadorEffect(int chosenCard, int numToDiscard, int handPos, int cu
     {
         for (int m = 0; m < state->handCount[currentPlayer]; m++)
         {
-            if (state->hand[currentPlayer][m] == chosenCardInHand)
+            if (state->hand[currentPlayer][m] = chosenCardInHand)
             {
                 discardCard(m, currentPlayer, state, 1);
                 break;
