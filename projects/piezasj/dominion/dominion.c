@@ -887,6 +887,8 @@ int validateHasCardAmount(int numToDiscard, int chosenCard, int handPos, int cho
     {
         return 0;
     }
+
+    return 1;
 }
 
 int handleAmbassadorEffect(int chosenCard, int numToDiscard, int handPos, int currentPlayer, struct gameState *state)
@@ -949,6 +951,8 @@ int validateMiningChoices(int cardInHand, int desiredCard)
     {
         return 0;
     }
+
+    return 1;
 }
 
 int handleMineEffect(struct gameState *state, int currentPlayer, int cardToTrash, int desiredCard, int handPos)
