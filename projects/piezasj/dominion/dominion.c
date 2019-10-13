@@ -896,7 +896,7 @@ int handleAmbassadorEffect(int chosenCard, int numToDiscard, int handPos, int cu
     int validAmount = validateHasCardAmount(numToDiscard, chosenCard, handPos, chosenCardInHand);
 
     if (!validAmount) {
-        return - 1;
+        return -1;
     }
 
     if (DEBUG)
@@ -958,7 +958,7 @@ int handleMineEffect(struct gameState *state, int currentPlayer, int cardToTrash
     int isValidChoice = validateMiningChoices(state->hand[currentPlayer][cardToTrash], desiredCard);
 
     if (!isValidChoice) {
-        return - 1;
+        return -1;
     }
 
     gainCard(desiredCard, state, 2, currentPlayer);
