@@ -136,4 +136,8 @@ int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, 
 
 int handleAmbassadorEffect(int choice1, int choice2, int handPos, int currentPlayer, struct gameState *state);
 
+int handleTributeEffect(struct gameState *state, int tributeRevealedCards[], int currentPlayer, int nextPlayer);
+
+void moveTopTwoCardsToTribute(int tributeRevealedCards[], struct gameState *state, int nextPlayer);
+
 #endif
