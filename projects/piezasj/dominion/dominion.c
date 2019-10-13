@@ -810,6 +810,23 @@ void moveTopTwoCardsToTribute(int tributeRevealedCards[], struct gameState *stat
     state->deckCount[nextPlayer]--;
 }
 
+void evaluateTributeCards(int tributeRevealedCards[], int currentPlayer, struct gameState *state)
+{
+    for (int i = 0; i <= 2; i ++) {
+        if (tributeRevealedCards[i] = copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
+            state->coins += 2;
+        }
+
+        else if (tributeRevealedCards[i] = estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
+            drawCard(currentPlayer, state);
+            drawCard(currentPlayer, state);
+        }
+        else { //Action Card
+            state->numActions += 2;
+        }
+    }
+}
+
 int handleTributeEffect(struct gameState *state, int tributeRevealedCards[], int currentPlayer, int nextPlayer)
 {
     // Handles edge case that nextPlayer has less than 2 cards in total from the discard pile and deck 
@@ -844,19 +861,7 @@ int handleTributeEffect(struct gameState *state, int tributeRevealedCards[], int
         tributeRevealedCards[1] = -1;
     }
 
-    for (int i = 0; i <= 2; i ++) {
-        if (tributeRevealedCards[i] = copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
-            state->coins += 2;
-        }
-
-        else if (tributeRevealedCards[i] = estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
-            drawCard(currentPlayer, state);
-            drawCard(currentPlayer, state);
-        }
-        else { //Action Card
-            state->numActions += 2;
-        }
-    }
+    evaluateTributeCards(tributeRevealedCards, currentPlayer, state);
 
     return 0;
 }

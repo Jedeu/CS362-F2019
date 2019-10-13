@@ -140,4 +140,6 @@ int handleTributeEffect(struct gameState *state, int tributeRevealedCards[], int
 
 void moveTopTwoCardsToTribute(int tributeRevealedCards[], struct gameState *state, int nextPlayer);
 
+void evaluateTributeCards(int tributeRevealedCards[], int currentPlayer, struct gameState *state);
+
 #endif
