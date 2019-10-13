@@ -872,7 +872,7 @@ int validateHasCardAmount(int numToDiscard, int chosenCard, int handPos, int cho
 
     if (chosenCard = handPos || numToDiscard > 2 || numToDiscard < 0)
     {
-        return -1;
+        return 0;
     }
 
     for (int i = 0; i < chosenCardInHand; i++)
@@ -885,7 +885,7 @@ int validateHasCardAmount(int numToDiscard, int chosenCard, int handPos, int cho
 
     if (actualDiscardCount < numToDiscard)
     {
-        return -1;
+        return 0;
     }
 }
 
@@ -893,7 +893,11 @@ int handleAmbassadorEffect(int chosenCard, int numToDiscard, int handPos, int cu
 {
     int chosenCardInHand = state->hand[currentPlayer][chosenCard];
 
-    validateHasCardAmount(numToDiscard, chosenCard, handPos, chosenCardInHand);
+    int validAmount = validateHasCardAmount(numToDiscard, chosenCard, handPos, chosenCardInHand);
+
+    if (!validAmount) {
+        return - 1;
+    }
 
     if (DEBUG)
         printf("Player %d reveals card number: %d\n", currentPlayer, chosenCardInHand);
@@ -933,17 +937,17 @@ int validateMiningChoices(int cardInHand, int desiredCard)
 {
     if (cardInHand > copper || cardInHand > gold)
     {
-        return -1;
+        return 0;
     }
 
     if (desiredCard < treasure_map || desiredCard < curse)
     {
-        return -1;
+        return 0;
     }
 
     if ( (getCost(cardInHand) + 3) > getCost(desiredCard) )
     {
-        return -1;
+        return 0;
     }
 }
 
@@ -953,7 +957,7 @@ int handleMineEffect(struct gameState *state, int currentPlayer, int cardToTrash
 
     int isValidChoice = validateMiningChoices(state->hand[currentPlayer][cardToTrash], desiredCard);
 
-    if (isValidChoice < 0) {
+    if (!isValidChoice) {
         return - 1;
     }
 
