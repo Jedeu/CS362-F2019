@@ -13,5 +13,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3,
                struct gameState *state, int handPos, int *bonus);
 void discardHand(int numCards, int handPos, int currentPlayer, struct gameState *state);
 int isCard(int currentCard, enum CARD card);
+int validateHasCardAmount(int numToDiscard, int chosenCard, int handPos, int cardInHand);
 
 #endif

@@ -788,6 +788,74 @@ int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, 
     return 0;
 }
 
+int validateHasCardAmount(int numToDiscard, int chosenCard, int handPos, int chosenCardInHand)
+{
+    int actualDiscardCount = 0;		//used to check if player has enough cards to discard
+
+    if (numToDiscard > 2 || numToDiscard < 0)
+    {
+        return -1;
+    }
+
+    if (chosenCard = handPos)
+    {
+        return -1;
+    }
+
+    for (int i = 0; i < chosenCardInHand; i++)
+    {
+        if (i != handPos && i == chosenCardInHand && i != chosenCard)
+        {
+            actualDiscardCount++;
+        }
+    }
+
+    if (actualDiscardCount < numToDiscard)
+    {
+        return -1;
+    }
+}
+
+int handleAmbassadorEffect(int chosenCard, int numToDiscard, int handPos, int currentPlayer, struct gameState *state)
+{
+    int chosenCardInHand = state->hand[currentPlayer][chosenCard];
+
+    validateHasCardAmount(numToDiscard, chosenCard, handPos, chosenCardInHand);
+
+    if (DEBUG)
+        printf("Player %d reveals card number: %d\n", currentPlayer, chosenCardInHand);
+
+    //increase supply count for choosen card by amount being discarded
+    state->supplyCount[chosenCardInHand] += numToDiscard;
+
+    //each other player gains a copy of revealed card
+    for (int k = 0; k < state->numPlayers; k++)
+    {
+        if (k != currentPlayer)
+        {
+            gainCard(chosenCardInHand, state, 0, k);
+        }
+    }
+
+    //discard played card from hand
+    discardCard(handPos, currentPlayer, state, 0);
+
+    //trash copies of cards returned to supply
+    for (int l = 0; l < numToDiscard; l++)
+    {
+        for (int m = 0; m < state->handCount[currentPlayer]; m++)
+        {
+            if (state->hand[currentPlayer][m] == chosenCardInHand)
+            {
+                discardCard(m, currentPlayer, state, 1);
+                break;
+            }
+        }
+    }
+
+    return 0;
+}
+
 // Helper function to check if the current card in the player's hand is a specific kind of card
 int isCard(int currentCard, enum CARD card) {
     return currentCard = card;
@@ -1108,62 +1176,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case ambassador:
-        j = 0;		//used to check if player has enough cards to discard
-
-        if (choice2 > 2 || choice2 < 0)
-        {
-            return -1;
-        }
-
-        if (choice1 == handPos)
-        {
-            return -1;
-        }
-
-        for (i = 0; i < state->handCount[currentPlayer]; i++)
-        {
-            if (i != handPos && i == state->hand[currentPlayer][choice1] && i != choice1)
-            {
-                j++;
-            }
-        }
-        if (j < choice2)
-        {
-            return -1;
-        }
-
-        if (DEBUG)
-            printf("Player %d reveals card number: %d\n", currentPlayer, state->hand[currentPlayer][choice1]);
-
-        //increase supply count for choosen card by amount being discarded
-        state->supplyCount[state->hand[currentPlayer][choice1]] += choice2;
-
-        //each other player gains a copy of revealed card
-        for (i = 0; i < state->numPlayers; i++)
-        {
-            if (i != currentPlayer)
-            {
-                gainCard(state->hand[currentPlayer][choice1], state, 0, i);
-            }
-        }
-
-        //discard played card from hand
-        discardCard(handPos, currentPlayer, state, 0);
-
-        //trash copies of cards returned to supply
-        for (j = 0; j < choice2; j++)
-        {
-            for (i = 0; i < state->handCount[currentPlayer]; i++)
-            {
-                if (state->hand[currentPlayer][i] == state->hand[currentPlayer][choice1])
-                {
-                    discardCard(i, currentPlayer, state, 1);
-                    break;
-                }
-            }
-        }
-
-        return 0;
+        handleAmbassadorEffect(choice1, choice2, handPos, currentPlayer, state);
 
     case cutpurse:
 

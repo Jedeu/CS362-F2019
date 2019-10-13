@@ -134,4 +134,6 @@ int handleBaronEffect(int choice, struct gameState *state, int currentPlayer);
 
 int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, int choice1, int choice2);
 
+int handleAmbassadorEffect(int choice1, int choice2, int handPos, int currentPlayer, struct gameState *state);
+
 #endif
