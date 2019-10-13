@@ -695,10 +695,10 @@ void gainEstateCard(struct gameState *state, int currentPlayer)
     }
 }
 
-int handleBaronEffect(int choice, struct gameState *state, int currentPlayer)
+int handleBaronEffect(int discardEstate, struct gameState *state, int currentPlayer)
 {
     state->numBuys++;//Increase buys by 1!
-        if (choice > 0) { //Boolean true or going to discard an estate
+        if (discardEstate > 0) { //Boolean true or going to discard an estate
             int p = 0;//Iterator for hand!
             int card_not_discarded = 1;//Flag for discard set!
             while(card_not_discarded) {
@@ -747,7 +747,7 @@ int handleBaronEffect(int choice, struct gameState *state, int currentPlayer)
         return 0;
 }
 
-int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, int choice1, int choice2)
+int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, int getTwoCoins, int discardAndRedraw)
 {
     //+1 action
     state->numActions++;
@@ -755,11 +755,11 @@ int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, 
     //discard card from hand
     discardCard(handPos, currentPlayer, state, 0);
 
-    if (choice1)
+    if (getTwoCoins)
     {
         state->coins = state->coins + 2;
     }
-    else if (choice2)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
+    else if (discardAndRedraw)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
     {
         discardHand(numHandCards(state), handPos, currentPlayer, state);
 
