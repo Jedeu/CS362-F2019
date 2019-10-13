@@ -12,6 +12,7 @@ int getCost(int cardNumber);
 int cardEffect(int card, int choice1, int choice2, int choice3,
                struct gameState *state, int handPos, int *bonus);
 void gainEstateCard(struct gameState *state, int currentPlayer);
-int isCard(int current_card, enum CARD card);
+void discardHand(int numCards, int handPos, int currentPlayer, struct gameState *state);
+int isCard(int currentCard, enum CARD card);
 
 #endif

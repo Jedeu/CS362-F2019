@@ -696,8 +696,16 @@ void gainEstateCard(struct gameState *state, int currentPlayer)
 }
 
 // Helper function to check if the current card in the player's hand is a specific kind of card
-int isCard(int current_card, enum CARD card) {
-    return current_card = card;
+int isCard(int currentCard, enum CARD card) {
+    return currentCard = card;
+}
+
+void discardHand(int numCards, int handPos, int currentPlayer, struct gameState *state)
+{
+    while(numCards > 0)
+    {
+        discardCard(handPos, currentPlayer, state, 1);
+    }
 }
 
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
@@ -978,11 +986,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         }
         else if (choice2)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
         {
-            //discard hand
-            while(numHandCards(state) > 0)
-            {
-                discardCard(handPos, currentPlayer, state, 0);
-            }
+            discardHand(numHandCards(state), handPos, currentPlayer, state);
 
             //draw 4
             for (i = 0; i < 4; i++)
@@ -997,11 +1001,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
                 {
                     if ( state->handCount[i] > 4 )
                     {
-                        //discard hand
-                        while( state->handCount[i] > 0 )
-                        {
-                            discardCard(handPos, i, state, 0);
-                        }
+
+                        discardHand(numHandCards(state), handPos, i, state);
 
                         //draw 4
                         for (j = 0; j < 4; j++)
