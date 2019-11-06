@@ -698,53 +698,53 @@ void gainEstateCard(struct gameState *state, int currentPlayer)
 int handleBaronEffect(int discardEstate, struct gameState *state, int currentPlayer)
 {
     state->numBuys++;//Increase buys by 1!
-        if (discardEstate > 0) { //Boolean true or going to discard an estate
-            int p = 0;//Iterator for hand!
-            int card_not_discarded = 1;//Flag for discard set!
-            while(card_not_discarded) {
-                int currentCard = state->hand[currentPlayer][p];
-                int currentPlayerHandCount = state->handCount[currentPlayer];
-                if (isCard(currentCard, estate)) {
-                    state->coins += 4;//Add 4 coins to the amount of coins
+    if (discardEstate > 0) { //Boolean true or going to discard an estate
+        int p = 0;//Iterator for hand!
+        int card_not_discarded = 1;//Flag for discard set!
+        while(card_not_discarded) {
+            int currentCard = state->hand[currentPlayer][p];
+            int currentPlayerHandCount = state->handCount[currentPlayer];
+            if (isCard(currentCard, estate)) {
+                state->coins += 4;//Add 4 coins to the amount of coins
 
-                    // TODO: This logic is fishy and looks very similar to discardCard except that it doesn't
-                    // add the current card to the played pile
-                    // I'll address this once I build some unit tests to see if it works as intended
-                    int currentPlayerDiscardCount = state->discardCount[currentPlayer];
-                    state->discard[currentPlayer][currentPlayerDiscardCount] = currentCard;
-                    currentPlayerDiscardCount++;
+                // TODO: This logic is fishy and looks very similar to discardCard except that it doesn't
+                // add the current card to the played pile
+                // I'll address this once I build some unit tests to see if it works as intended
+                int currentPlayerDiscardCount = state->discardCount[currentPlayer];
+                state->discard[currentPlayer][currentPlayerDiscardCount] = currentCard;
+                currentPlayerDiscardCount++;
 
-                    for (; p < state->handCount[currentPlayer]; p++) {
-                        currentCard = state->hand[currentPlayer][p+1];
-                    }
-
-                    state->hand[currentPlayer][currentPlayerHandCount] = -1;
-                    currentPlayerHandCount--;
-
-                    card_not_discarded = 0;//Exit the loop
-                }
-                else if (p > currentPlayerHandCount) {
-                    // We've looped through all cards and there are no estate cards to be played
-                    if(DEBUG) {
-                        printf("No estate cards in your hand, invalid choice\n");
-                        printf("Must gain an estate if there are any\n");
-                    }
-                    gainEstateCard(state, currentPlayer);
-                    card_not_discarded = 0;//Exit the loop
+                for (; p < state->handCount[currentPlayer]; p++) {
+                    currentCard = state->hand[currentPlayer][p+1];
                 }
 
-                else {
-                    p++;//Next card
+                state->hand[currentPlayer][currentPlayerHandCount] = -1;
+                currentPlayerHandCount--;
+
+                card_not_discarded = 0;//Exit the loop
+            }
+            else if (p > currentPlayerHandCount) {
+                // We've looped through all cards and there are no estate cards to be played
+                if(DEBUG) {
+                    printf("No estate cards in your hand, invalid choice\n");
+                    printf("Must gain an estate if there are any\n");
                 }
+                gainEstateCard(state, currentPlayer);
+                card_not_discarded = 0;//Exit the loop
+            }
+
+            else {
+                p++;//Next card
             }
         }
+    }
 
-        else {
-            gainEstateCard(state, currentPlayer);
-        }
+    else {
+        gainEstateCard(state, currentPlayer);
+    }
 
 
-        return 0;
+    return 0;
 }
 
 int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, int getTwoCoins, int discardAndRedraw)

@@ -52,3 +52,8 @@ Mkfile.old
 dkms.conf
 *.pages
 *.pdf
+
+# GCOV stuff
+*.gcda
+*.gcno
+*.gcov
