@@ -9,7 +9,8 @@
 
 static const struct gameState EmptyStruct;
 
-int main() {
+int main() 
+{
     int numPassedTests = 0;
     int totalTests = 6;
     int seed = 1000;
