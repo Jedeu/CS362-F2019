@@ -14,7 +14,7 @@ static const struct gameState EmptyStruct;
 int main()
 {
     int numPassedTests = 0;
-    int totalTests = 2;
+    int totalTests = 4;
     int seed = 1000;
     int numPlayers = 2;
     int thisPlayer = 0;
@@ -60,7 +60,7 @@ int main()
 
     G = EmptyStruct;
 
-    /* Test the discardAndRedraw option logic */
+    /* Test the discardAndRedraw option logic with only the current player */
 
     initializeGame(numPlayers, k, seed, &G);
 
@@ -68,11 +68,11 @@ int main()
        but there's a high chance that method is buggy so I'm manually adjusting the game state */
     G.handCount[1] = 2;
 
-    int expectedDiscardCount = G.discardCount + G.handCount[0];
+    int expectedDiscardCount = G.discardCount[0] + G.handCount[0];
 
     handleMinionEffect(&G, G.hand[thisPlayer][0], thisPlayer, FALSE, TRUE);
 
-    int numDiscardedCards = G.discardCount;
+    int numDiscardedCards = G.discardCount[0];
     
     if (numDiscardedCards != expectedDiscardCount)
     {
@@ -83,6 +83,36 @@ int main()
         printf("It only discards the player's hand if the other players have less than 4 cards: %s\n", CHECK_MARK);
         numPassedTests++;
     }
+
+    G = EmptyStruct;
+
+    /* Test the discardAndRedraw option logic with all players */
+
+    initializeGame(numPlayers, k, seed, &G);
+
+    /* initializeGame doesn't draw cards for the other players (though it should) so I have to do this manually */
+    for (int j = 0; j < 5; j++)
+    {
+        drawCard(1, &G);
+    }
+
+    expectedDiscardCount = G.discardCount[0] + G.discardCount[1] + G.handCount[0] + G.handCount[1];
+
+    handleMinionEffect(&G, G.hand[thisPlayer][0], thisPlayer, FALSE, TRUE);
+
+    numDiscardedCards = G.discardCount[0] + G.discardCount[1];
+    
+    if (numDiscardedCards != expectedDiscardCount)
+    {
+        printf("FAIL: Discard count is incorrect. Expected discard count: %d. Actual discard count: %d\n", expectedDiscardCount, numDiscardedCards);
+    }
+    else
+    {   
+        printf("It discard the current player and the other player's cards and then redraws for both players: %s\n", CHECK_MARK);
+        numPassedTests++;
+    }
+
+    G = EmptyStruct;
 
     printf("%d out of %d tests passed\n", numPassedTests, totalTests);
 }
