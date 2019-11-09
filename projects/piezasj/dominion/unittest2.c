@@ -53,12 +53,36 @@ int main()
         printf("FAIL: Action count is incorrect. Expected action count: %d. Actual action count: %d\n", numActionsBefore + 1, G.numActions);
     }
     else
-    {
+    {   
         printf("It increase the number of actions: %s\n", CHECK_MARK);
         numPassedTests++;
     }
 
     G = EmptyStruct;
+
+    /* Test the discardAndRedraw option logic */
+
+    initializeGame(numPlayers, k, seed, &G);
+
+    /* Normally I would simply call discardCard enough times here to ensure a handCount of 2
+       but there's a high chance that method is buggy so I'm manually adjusting the game state */
+    G.handCount[1] = 2;
+
+    int expectedDiscardCount = G.discardCount + G.handCount[0];
+
+    handleMinionEffect(&G, G.hand[thisPlayer][0], thisPlayer, FALSE, TRUE);
+
+    int numDiscardedCards = G.discardCount;
+    
+    if (numDiscardedCards != expectedDiscardCount)
+    {
+        printf("FAIL: Discard count is incorrect. Expected discard count: %d. Actual discard count: %d\n", expectedDiscardCount, numDiscardedCards);
+    }
+    else
+    {   
+        printf("It only discards the player's hand if the other players have less than 4 cards: %s\n", CHECK_MARK);
+        numPassedTests++;
+    }
 
     printf("%d out of %d tests passed\n", numPassedTests, totalTests);
 }
