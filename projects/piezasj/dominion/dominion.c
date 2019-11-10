@@ -852,7 +852,6 @@ int handleTributeEffect(struct gameState *state, int tributeRevealedCards[], int
             }
         }
     }
-
     else {
         if (state->deckCount[nextPlayer] == 0) {
             moveDiscardPileToDeck(state, nextPlayer);
