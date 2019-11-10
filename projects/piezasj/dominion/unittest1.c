@@ -12,7 +12,7 @@ static const struct gameState EmptyStruct;
 int main() 
 {
     int numPassedTests = 0;
-    int totalTests = 6;
+    int totalTests = 7;
     int seed = 1000;
     int numPlayers = 2;
     int thisPlayer = 0;
@@ -119,6 +119,27 @@ int main()
     else
     {
         printf("It should give the player an estate card choose to discard one but don't have one in their hand: %s\n", CHECK_MARK);
+        numPassedTests++;
+    }
+
+    G = EmptyStruct;
+
+    // Test that the game gives the player an estate card if they make an erroneous choice (INSERTED BUG)
+    initializeGame(numPlayers, k, seed, &G);
+    G.supplyCount[estate] = 0;
+    discardEstate = 0;
+
+    int expectedHandCount = G.handCount[thisPlayer];
+
+    handleBaronEffect(discardEstate, &G, thisPlayer);
+
+    if (G.handCount[thisPlayer] != expectedHandCount)
+    {
+        printf("FAIL: Hand count should not have changed when estate supply count is 0\n");
+    }
+    else
+    {
+        printf("It should not add an estate card when there are no estate cards in the supply: %s\n", CHECK_MARK);
         numPassedTests++;
     }
     
