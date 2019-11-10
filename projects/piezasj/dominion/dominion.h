@@ -134,7 +134,7 @@ int handleBaronEffect(int choice, struct gameState *state, int currentPlayer);
 
 int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, int choice1, int choice2);
 
-int handleAmbassadorEffect(int choice1, int choice2, int handPos, int currentPlayer, struct gameState *state);
+int handleAmbassadorEffect(int chosenCardPos, int numToDiscard, int ambassadorCardPos, int currentPlayer, struct gameState *state);
 
 int handleTributeEffect(struct gameState *state, int tributeRevealedCards[], int currentPlayer, int nextPlayer);
 
@@ -142,7 +142,7 @@ void moveTopTwoCardsToTribute(int tributeRevealedCards[], struct gameState *stat
 
 void evaluateTributeCards(int tributeRevealedCards[], int currentPlayer, struct gameState *state);
 
-int handleMineEffect(struct gameState *state, int currentPlayer, int cardToTrash, int desiredCard, int handPos);
+int handleMineEffect(struct gameState *state, int currentPlayer, int posCardToTrash, int desiredCard, int handPos);
 
 int validateMiningChoices(int cardInHand, int desiredCard);
 

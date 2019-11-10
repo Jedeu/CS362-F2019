@@ -1,0 +1,259 @@
+######################################## BEGIN TEST: BARON ########################################
+It should give the player 4 more coins if an estate card is discarded: ✓
+It should remove a card from the player's hand after discarding the estate card: ✓
+TEST_GAIN_ESTATE_FAILED: Number of cards in the player's hand is incorrect. Expected 6 cards. Actual card count: 5
+TEST_GAIN_ESTATE_FAILED: Did not obtain an estate card
+TEST_GAIN_ESTATE_BECAUSE_HAS_NO_ESTATE FAILED: Number of cards in the player's hand is incorrect. Expected 6 cards. Actual card count: 5
+TEST_GAIN_ESTATE_BECAUSE_HAS_NO_ESTATE FAILED: Did not acquire an estate card
+It should not add an estate card when there are no estate cards in the supply: ✓
+3 out of 7 tests passed for handleBaronEffect
+########################################## END TEST: BARON ########################################
+
+######################################## BEGIN TEST: MINION ########################################
+It should give the player 2 more coins if the player makes that choice: ✓
+It increase the number of actions: ✓
+TEST_DISCARD_AND_REDRAW_SELF FAILED: Discard count is incorrect. Expected discard count: 5. Actual discard count: 0
+TEST_DISCARD_AND_REDRAW_ALL FAILED: Discard count is incorrect. Expected discard count: 10. Actual discard count: 0
+2 out of 4 tests passed
+########################################## END TEST: MINION ########################################
+
+######################################## BEGIN TEST: AMBASSADOR ########################################
+TEST GIVE_OTHER_PLAYER_ADVENTURER_CARD FAILED: Other player card count is incorrect. Expected card count: 1. Actual card count: 0
+TEST GIVE_OTHER_PLAYER_ADVENTURER_CARD FAILED: Current player discard count is incorrect. Expected discard count: 1. Actual discard count: 0
+TEST GIVE_OTHER_PLAYER_ADVENTURER_CARD FAILED: Current player hand count is incorrect. Expected hand count: 2. Actual hand count: 3
+TEST GIVE_OTHER_PLAYER_ADVENTURER_CARD FAILED: Did not expect to have adventurer card in hand. Current position: 2
+It should fail if the number to discard is not between 1 and 2: ✓
+It should fail if the player does not have copies of the chosen card: ✓
+TEST_DISCARD_INPUT_0 FAILED: Unexpected successful return from function
+It should fail if the player chooses to use the same ambassador card to discard that they played: ✓
+3 out of 7 tests passed
+########################################## END TEST: AMBASSADOR ########################################
+
+######################################## BEGIN TEST: TRIBUTE ########################################
+TEST_GAIN_2_COINS FAILED: Coin count is incorrect. Expected coin count: 6. Actual coin count: 10
+TEST_TRIBUTE_EFFECT_VICTORY_CARD FAILED: hand count is incorrect. Expected hand count: 2. Actual hand count: 0
+TEST_TRIBUTE_EFFECT_VICTORY_CARD FAILED: card found in Tribute is incorrect. Expected card found in Tribute: 2. Actual card found in Tribute: 1
+TEST_ACTION_CARD_EFFECT FAILED: Action count is incorrect. Expected action count: 2. Actual action count: 1
+TEST_TREASURE_CARD_EFFECT FAILED: Coin count is incorrect. Expected coin count: 6. Actual coin count: 10
+It should send two cards to the Tribute pile: ✓
+TEST CHECK_TRIBUTE_PILE_CARDS FAILED: card found in Tribute is incorrect. Expected cards found in Tribute: 6, 19.
+Actual card found in Tribute:
+1
+1
+1 out of 7 tests passed
+########################################## END TEST: TRIBUTE ########################################
+
+######################################## BEGIN TEST: BARON ########################################
+It should remove the mine card after being played: ✓
+Testing TRADE_COPPER_FOR_GOLD FAILED: Did not receive gold card. Current card in last position: 4
+1 out of 2 tests passed
+######################################## END TEST: BARON ##########################################
+Function 'compare'
+Lines executed:83.33% of 6
+Branches executed:100.00% of 4
+Taken at least once:75.00% of 4
+No calls
+
+Function 'newGame'
+Lines executed:0.00% of 2
+No branches
+No calls
+
+Function 'kingdomCards'
+Lines executed:0.00% of 12
+No branches
+No calls
+
+Function 'initializeGame'
+Lines executed:80.77% of 78
+Branches executed:91.30% of 46
+Taken at least once:73.91% of 46
+No calls
+
+Function 'shuffle'
+Lines executed:100.00% of 18
+Branches executed:100.00% of 8
+Taken at least once:100.00% of 8
+No calls
+
+Function 'playCard'
+Lines executed:0.00% of 14
+Branches executed:0.00% of 10
+Taken at least once:0.00% of 10
+No calls
+
+Function 'buyCard'
+Lines executed:0.00% of 13
+Branches executed:0.00% of 6
+Taken at least once:0.00% of 6
+No calls
+
+Function 'numHandCards'
+Lines executed:100.00% of 1
+No branches
+No calls
+
+Function 'handCard'
+Lines executed:0.00% of 2
+No branches
+No calls
+
+Function 'supplyCount'
+Lines executed:100.00% of 1
+No branches
+No calls
+
+Function 'fullDeckCount'
+Lines executed:0.00% of 11
+Branches executed:0.00% of 12
+Taken at least once:0.00% of 12
+No calls
+
+Function 'whoseTurn'
+Lines executed:100.00% of 1
+No branches
+No calls
+
+Function 'endTurn'
+Lines executed:0.00% of 22
+Branches executed:0.00% of 6
+Taken at least once:0.00% of 6
+No calls
+
+Function 'isGameOver'
+Lines executed:0.00% of 12
+Branches executed:0.00% of 8
+Taken at least once:0.00% of 8
+No calls
+
+Function 'scoreFor'
+Lines executed:0.00% of 62
+Branches executed:0.00% of 42
+Taken at least once:0.00% of 42
+No calls
+
+Function 'getWinners'
+Lines executed:0.00% of 33
+Branches executed:0.00% of 22
+Taken at least once:0.00% of 22
+No calls
+
+Function 'drawCard'
+Lines executed:70.83% of 24
+Branches executed:100.00% of 6
+Taken at least once:66.67% of 6
+No calls
+
+Function 'getCost'
+Lines executed:13.33% of 30
+Branches executed:100.00% of 28
+Taken at least once:7.14% of 28
+No calls
+
+Function 'gainEstateCard'
+Lines executed:75.00% of 8
+Branches executed:100.00% of 4
+Taken at least once:50.00% of 4
+No calls
+
+Function 'handleBaronEffect'
+Lines executed:81.48% of 27
+Branches executed:80.00% of 10
+Taken at least once:70.00% of 10
+No calls
+
+Function 'handleMinionEffect'
+Lines executed:100.00% of 20
+Branches executed:100.00% of 14
+Taken at least once:92.86% of 14
+No calls
+
+Function 'moveDiscardPileToDeck'
+Lines executed:0.00% of 8
+Branches executed:0.00% of 2
+Taken at least once:0.00% of 2
+No calls
+
+Function 'moveTopTwoCardsToTribute'
+Lines executed:100.00% of 7
+No branches
+No calls
+
+Function 'evaluateTributeCards'
+Lines executed:43.75% of 16
+Branches executed:75.00% of 8
+Taken at least once:50.00% of 8
+No calls
+
+Function 'handleTributeEffect'
+Lines executed:87.50% of 16
+Branches executed:100.00% of 8
+Taken at least once:75.00% of 8
+No calls
+
+Function 'validateHasCardAmount'
+Lines executed:100.00% of 12
+Branches executed:100.00% of 16
+Taken at least once:93.75% of 16
+No calls
+
+Function 'handleAmbassadorEffect'
+Lines executed:95.00% of 20
+Branches executed:100.00% of 12
+Taken at least once:83.33% of 12
+No calls
+
+Function 'validateMiningChoices'
+Lines executed:62.50% of 8
+Branches executed:100.00% of 10
+Taken at least once:50.00% of 10
+No calls
+
+Function 'handleMineEffect'
+Lines executed:84.62% of 13
+Branches executed:100.00% of 6
+Taken at least once:50.00% of 6
+No calls
+
+Function 'isCard'
+Lines executed:100.00% of 1
+No branches
+No calls
+
+Function 'discardHand'
+Lines executed:100.00% of 3
+Branches executed:100.00% of 2
+Taken at least once:100.00% of 2
+No calls
+
+Function 'cardEffect'
+Lines executed:0.00% of 152
+Branches executed:0.00% of 93
+Taken at least once:0.00% of 93
+No calls
+
+Function 'discardCard'
+Lines executed:100.00% of 15
+Branches executed:100.00% of 6
+Taken at least once:100.00% of 6
+No calls
+
+Function 'gainCard'
+Lines executed:80.00% of 15
+Branches executed:100.00% of 6
+Taken at least once:83.33% of 6
+No calls
+
+Function 'updateCoins'
+Lines executed:71.43% of 14
+Branches executed:100.00% of 8
+Taken at least once:75.00% of 8
+No calls
+
+File 'dominion.c'
+Lines executed:39.31% of 697
+Branches executed:48.14% of 403
+Taken at least once:33.50% of 403
+No calls
+dominion.c:creating 'dominion.c.gcov'
+

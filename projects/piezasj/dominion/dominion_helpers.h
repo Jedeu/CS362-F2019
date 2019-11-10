@@ -11,8 +11,8 @@ int gainCard(int supplyPos, struct gameState *state, int toFlag, int player);
 int getCost(int cardNumber);
 int cardEffect(int card, int choice1, int choice2, int choice3,
                struct gameState *state, int handPos, int *bonus);
-void discardHand(int numCards, int handPos, int currentPlayer, struct gameState *state);
+void discardHand(int handPos, int currentPlayer, struct gameState *state);
 int isCard(int currentCard, enum CARD card);
-int validateHasCardAmount(int numToDiscard, int chosenCard, int handPos, int cardInHand);
+int validateHasCardAmount(int numToDiscard, int chosenCardPos, int ambassadorCardPos, int chosenCardInHand, int currentPlayer, struct gameState* state);
 void moveDiscardPileToDeck(struct gameState *state, int nextPlayer);
 #endif

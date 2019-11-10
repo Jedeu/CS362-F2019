@@ -30,7 +30,6 @@
 
 # Executables
 *.exe
-*.out
 *.app
 *.i*86
 *.x86_64
@@ -52,3 +51,11 @@ Mkfile.old
 dkms.conf
 *.pages
 *.pdf
+
+# GCOV stuff
+*.gcda
+*.gcno
+*.gcov
+
+# VSCode settings
+.vscode
