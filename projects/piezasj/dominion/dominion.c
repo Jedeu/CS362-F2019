@@ -866,18 +866,18 @@ int handleTributeEffect(struct gameState *state, int tributeRevealedCards[], int
     return 0;
 }
 
-int validateHasCardAmount(int numToDiscard, int chosenCard, int handPos, int chosenCardInHand)
+int validateHasCardAmount(int numToDiscard, int chosenCardPos, int ambassadorCardPos, int chosenCardInHand, int currentPlayer, struct gameState* state)
 {
     int actualDiscardCount = 0;		//used to check if player has enough cards to discard
 
-    if (chosenCard = handPos || numToDiscard > 2 || numToDiscard < 0)
+    if (chosenCardPos == ambassadorCardPos || numToDiscard > 2 || numToDiscard < 0)
     {
         return 0;
     }
 
-    for (int i = 0; i < chosenCardInHand; i++)
+    for (int i = 0; i < state->handCount[currentPlayer]; i++)
     {
-        if (i != handPos && i == chosenCardInHand && i != chosenCard)
+        if (i != ambassadorCardPos && state->hand[currentPlayer][i] == chosenCardInHand && i != chosenCardPos)
         {
             actualDiscardCount++;
         }
@@ -891,12 +891,12 @@ int validateHasCardAmount(int numToDiscard, int chosenCard, int handPos, int cho
     return 1;
 }
 
-int handleAmbassadorEffect(int chosenCard, int numToDiscard, int handPos, int currentPlayer, struct gameState *state)
+int handleAmbassadorEffect(int chosenCardPos, int numToDiscard, int ambassadorCardPos, int currentPlayer, struct gameState *state)
 {
-    int chosenCardInHand = state->hand[currentPlayer][chosenCard];
+    int chosenCardInHand = state->hand[currentPlayer][chosenCardPos];
 
-    int validAmount = validateHasCardAmount(numToDiscard, chosenCard, handPos, chosenCardInHand);
-
+    int validAmount = validateHasCardAmount(numToDiscard, chosenCardPos, ambassadorCardPos, chosenCardInHand, currentPlayer, state);
+    
     if (!validAmount) {
         return -1;
     }
@@ -917,7 +917,7 @@ int handleAmbassadorEffect(int chosenCard, int numToDiscard, int handPos, int cu
     }
 
     //discard played card from hand
-    discardCard(handPos, currentPlayer, state, 0);
+    discardCard(ambassadorCardPos, currentPlayer, state, 0);
 
     //trash copies of cards returned to supply
     for (int l = 0; l < numToDiscard; l++)

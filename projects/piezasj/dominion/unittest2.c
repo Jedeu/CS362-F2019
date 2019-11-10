@@ -108,7 +108,7 @@ int main()
     }
     else
     {   
-        printf("It discard the current player and the other player's cards and then redraws for both players: %s\n", CHECK_MARK);
+        printf("It discards the current player and the other player's cards and then redraws for both players: %s\n", CHECK_MARK);
         numPassedTests++;
     }
 
