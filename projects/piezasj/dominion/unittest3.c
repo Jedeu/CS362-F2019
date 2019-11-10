@@ -12,7 +12,7 @@ static const struct gameState EmptyStruct;
 int main()
 {
     int numPassedTests = 0;
-    int totalTests = 6;
+    int totalTests = 7;
     int seed = 1000;
     int numPlayers = 2;
     int thisPlayer = 0;
@@ -71,6 +71,24 @@ int main()
     else
     {
         printf("It should remove all cards that were used in play: %s\n", CHECK_MARK);
+        numPassedTests++;
+    }
+
+    int hasAdventurerCard = 0;
+
+    for (int i = 0; i < G.handCount[thisPlayer]; i++)
+    {
+        if (G.hand[thisPlayer][i] == adventurer)
+        {   
+            printf("FAIL: Did not expected to have adventurer card in hand. Current position: %d\n", i);
+            hasAdventurerCard = 1;
+            break;
+        }
+    }
+
+    if (hasAdventurerCard == 0)
+    {
+        printf("It should remove all copies of the chosen card: %s\n", CHECK_MARK);
         numPassedTests++;
     }
 
