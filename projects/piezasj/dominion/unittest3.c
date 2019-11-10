@@ -103,6 +103,8 @@ int main()
 
     G.hand[thisPlayer][0] = adventurer;
     G.hand[thisPlayer][1] = ambassador;
+    adventurerPosition = 0;
+    ambassadorPosition = 1;
 
     result = handleAmbassadorEffect(adventurerPosition, 1, ambassadorPosition, thisPlayer, &G);
 
@@ -132,6 +134,25 @@ int main()
     else
     {
         printf("It should fail if the player chooses to discard 0 copies: %s\n", CHECK_MARK);
+        numPassedTests++;
+    }
+
+    G = EmptyStruct;
+
+    initializeGame(numPlayers, k, seed, &G);
+
+    G.hand[thisPlayer][1] = ambassador;
+    ambassadorPosition = 1;
+
+    result = handleAmbassadorEffect(ambassadorPosition, 0, ambassadorPosition, thisPlayer, &G);
+
+    if(result == 0)
+    {
+        printf("FAIL: Unexpected successful return from function\n");
+    }
+    else
+    {
+        printf("It should fail if the player chooses to use the same ambassador card to discard that they played: %s\n", CHECK_MARK);
         numPassedTests++;
     }
 
