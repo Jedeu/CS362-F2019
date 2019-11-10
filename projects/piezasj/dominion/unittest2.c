@@ -33,7 +33,7 @@ int main()
 
     if(G.coins != currentPlayerCoins + 2)
     {
-        printf("FAIL: Coin count is incorrect. Expected coin count: %d. Actual coin count: %d\n", currentPlayerCoins + 2, G.coins);
+        printf("TEST_GAIN_2_COINS FAILED: Coin count is incorrect. Expected coin count: %d. Actual coin count: %d\n", currentPlayerCoins + 2, G.coins);
     }
     else
     {
@@ -52,7 +52,7 @@ int main()
 
     if(G.numActions != numActionsBefore + 1)
     {
-        printf("FAIL: Action count is incorrect. Expected action count: %d. Actual action count: %d\n", numActionsBefore + 1, G.numActions);
+        printf("TEST_ADD_NUMACTIONS FAILED: Expected action count: %d. Actual action count: %d\n", numActionsBefore + 1, G.numActions);
     }
     else
     {   
@@ -78,7 +78,7 @@ int main()
     
     if (numDiscardedCards != expectedDiscardCount)
     {
-        printf("FAIL: Discard count is incorrect. Expected discard count: %d. Actual discard count: %d\n", expectedDiscardCount, numDiscardedCards);
+        printf("TEST_DISCARD_AND_REDRAW_SELF FAILED: Discard count is incorrect. Expected discard count: %d. Actual discard count: %d\n", expectedDiscardCount, numDiscardedCards);
     }
     else
     {   
@@ -106,7 +106,7 @@ int main()
     
     if (numDiscardedCards != expectedDiscardCount)
     {
-        printf("FAIL: Discard count is incorrect. Expected discard count: %d. Actual discard count: %d\n", expectedDiscardCount, numDiscardedCards);
+        printf("TEST_DISCARD_AND_REDRAW_ALL FAILED: Discard count is incorrect. Expected discard count: %d. Actual discard count: %d\n", expectedDiscardCount, numDiscardedCards);
     }
     else
     {   

@@ -44,7 +44,7 @@ int main()
 
     if(cardCountOtherPlayer != expectedCardCountOtherPlayer)
     {
-        printf("FAIL: Other player card count is incorrect. Expected card count: %d. Actual card count: %d\n", expectedCardCountOtherPlayer, cardCountOtherPlayer);
+        printf("TEST GIVE_OTHER_PLAYER_ADVENTURER_CARD FAILED: Other player card count is incorrect. Expected card count: %d. Actual card count: %d\n", expectedCardCountOtherPlayer, cardCountOtherPlayer);
     }
     else
     {
@@ -56,7 +56,7 @@ int main()
 
     if(discardCount != expectedDiscardCount)
     {
-        printf("FAIL: Current player discard count is incorrect. Expected discard count: %d. Actual discard count: %d\n", expectedDiscardCount, discardCount);
+        printf("TEST GIVE_OTHER_PLAYER_ADVENTURER_CARD FAILED: Current player discard count is incorrect. Expected discard count: %d. Actual discard count: %d\n", expectedDiscardCount, discardCount);
     }
     else
     {
@@ -68,7 +68,7 @@ int main()
 
     if(handCount != expectedHandCount)
     {
-        printf("FAIL: Current player hand count is incorrect. Expected hand count: %d. Actual hand count: %d\n", expectedHandCount, handCount);
+        printf("TEST GIVE_OTHER_PLAYER_ADVENTURER_CARD FAILED: Current player hand count is incorrect. Expected hand count: %d. Actual hand count: %d\n", expectedHandCount, handCount);
     }
     else
     {
@@ -82,7 +82,7 @@ int main()
     {
         if (G.hand[thisPlayer][i] == adventurer)
         {   
-            printf("FAIL: Did not expected to have adventurer card in hand. Current position: %d\n", i);
+            printf("TEST GIVE_OTHER_PLAYER_ADVENTURER_CARD FAILED: Did not expect to have adventurer card in hand. Current position: %d\n", i);
             hasAdventurerCard = 1;
             break;
         }
@@ -109,7 +109,7 @@ int main()
 
     if(result == 0)
     {
-        printf("FAIL: Unexpected successful return from function");
+        printf("TEST_BAD_DISCARD_INPUT FAILED: Unexpected successful return from function");
     }
     else
     {
@@ -130,7 +130,7 @@ int main()
 
     if(result == 0)
     {
-        printf("FAIL: Unexpected successful return from function");
+        printf("TEST_NO_COPIES_OF_CHOSEN_CARD FAILED: Unexpected successful return from function");
     }
     else
     {
@@ -149,7 +149,7 @@ int main()
 
     if(result == 0)
     {
-        printf("FAIL: Unexpected successful return from function\n");
+        printf("TEST_DISCARD_INPUT_0 FAILED: Unexpected successful return from function\n");
     }
     else
     {
@@ -168,7 +168,7 @@ int main()
 
     if(result == 0)
     {
-        printf("FAIL: Unexpected successful return from function\n");
+        printf("TEST_SAME_AMBASSADOR_DISCARD_AS_PLAYED: Unexpected successful return from function\n");
     }
     else
     {

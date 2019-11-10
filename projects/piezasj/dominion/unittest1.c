@@ -33,7 +33,7 @@ int main()
 
     if(G.coins != currentPlayerCoins + 4)
     {
-        printf("FAIL: Coin count is incorrect. Expected coin count: %d. Actual coin count: %d\n", currentPlayerCoins + 4, G.coins);
+        printf("TEST_GAIN_2_COINS FAILED: Coin count is incorrect. Expected coin count: %d. Actual coin count: %d\n", currentPlayerCoins + 4, G.coins);
     }
     else
     {
@@ -43,7 +43,7 @@ int main()
 
     if (currentPlayerCoins != expectedCardCount)
     {
-        printf("FAIL: Number of cards after discarding Estate card incorrected. Expected count: %d. Actual coin count: %d\n", expectedCardCount, currentPlayerCardCount);
+        printf("TEST_GAIN_2_COINS FAILED: Number of cards after discarding Estate card incorrected. Expected count: %d. Actual coin count: %d\n", expectedCardCount, currentPlayerCardCount);
     }
     else
     {
@@ -64,7 +64,7 @@ int main()
 
     if(G.handCount[thisPlayer] != expectedCardCount)
     {
-        printf("FAIL: Number of cards in the player's hand is incorrect. Expected %d cards. Actual card count: %d\n", expectedCardCount, G.handCount[thisPlayer]);
+        printf("TEST_GAIN_ESTATE_FAILED: Number of cards in the player's hand is incorrect. Expected %d cards. Actual card count: %d\n", expectedCardCount, G.handCount[thisPlayer]);
     }
     else
     {
@@ -76,7 +76,7 @@ int main()
     
     if (latestCardInHand != estate)
     {
-        printf("FAIL: Did not obtain an estate card\n");
+        printf("TEST_GAIN_ESTATE_FAILED: Did not obtain an estate card\n");
     }
     else 
     {
@@ -106,7 +106,7 @@ int main()
 
     if (thisPlayerNumCards != expectedCardCount)
     {
-        printf("FAIL: Number of cards in the player's hand is incorrect. Expected %d cards. Actual card count: %d\n", expectedCardCount, G.handCount[thisPlayer]);
+        printf("TEST_GAIN_ESTATE_BECAUSE_HAS_NO_ESTATE FAILED: Number of cards in the player's hand is incorrect. Expected %d cards. Actual card count: %d\n", expectedCardCount, G.handCount[thisPlayer]);
     }
     else
     {
@@ -116,7 +116,7 @@ int main()
 
     if (G.hand[thisPlayer][thisPlayerNumCards] != estate)
     {
-        printf("FAIL: Did not acquire an estate card\n");
+        printf("TEST_GAIN_ESTATE_BECAUSE_HAS_NO_ESTATE FAILED: Did not acquire an estate card\n");
     }
     else
     {
@@ -126,7 +126,7 @@ int main()
 
     G = EmptyStruct;
 
-    // Test that the game gives the player an estate card if they make an erroneous choice (INSERTED BUG)
+    // Test that the game does not give the player an estate card if there are none left in the supply (INSERTED BUG)
     initializeGame(numPlayers, k, seed, &G);
     G.supplyCount[estate] = 0;
     discardEstate = 0;
@@ -137,7 +137,7 @@ int main()
 
     if (G.handCount[thisPlayer] != expectedHandCount)
     {
-        printf("FAIL: Hand count should not have changed when estate supply count is 0\n");
+        printf("TEST_NO_ESTATE_SUPPLY FAILED: Hand count should not have changed when estate supply count is 0\n");
     }
     else
     {

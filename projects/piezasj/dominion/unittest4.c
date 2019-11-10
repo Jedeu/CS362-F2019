@@ -35,7 +35,7 @@ int main()
 
     if(G.coins != expectedCoins)
     {
-        printf("FAIL: Coin count is incorrect. Expected coin count: %d. Actual coin count: %d\n", expectedCoins, G.coins);
+        printf("TEST_GAIN_2_COINS FAILED: Coin count is incorrect. Expected coin count: %d. Actual coin count: %d\n", expectedCoins, G.coins);
     }
     else
     {
@@ -58,7 +58,7 @@ int main()
 
     if (G.handCount[nextPlayer] != expectedCardCount)
     {
-        printf("FAIL: hand count is incorrect. Expected hand count: %d. Actual hand count: %d\n", expectedCardCount, G.handCount[nextPlayer]);
+        printf("TEST_TRIBUTE_EFFECT_VICTORY_CARD FAILED: hand count is incorrect. Expected hand count: %d. Actual hand count: %d\n", expectedCardCount, G.handCount[nextPlayer]);
     }
     else
     {
@@ -68,7 +68,7 @@ int main()
 
     if (tributeRevealedCards[0] != duchy)
     {
-        printf("FAIL: card found in Tribute is incorrect. Expected card found in Tribute: %d. Actual card found in Tribute: %d\n", duchy, tributeRevealedCards[0]);
+        printf("TEST_TRIBUTE_EFFECT_VICTORY_CARD FAILED: card found in Tribute is incorrect. Expected card found in Tribute: %d. Actual card found in Tribute: %d\n", duchy, tributeRevealedCards[0]);
     }
     else
     {
@@ -92,7 +92,7 @@ int main()
 
     if (G.numActions != expectedActions)
     {
-        printf("FAIL: Action count is incorrect. Expected action count: %d. Actual action count: %d\n", expectedCardCount, G.numActions);
+        printf("TEST_ACTION_CARD_EFFECT FAILED: Action count is incorrect. Expected action count: %d. Actual action count: %d\n", expectedCardCount, G.numActions);
     }
     else
     {
@@ -102,7 +102,7 @@ int main()
 
     if (G.coins != expectedCoins)
     {
-        printf("FAIL: Coin count is incorrect. Expected coin count: %d. Actual coin count: %d\n", expectedCoins, G.coins);
+        printf("TEST_TREASURE_CARD_EFFECT FAILED: Coin count is incorrect. Expected coin count: %d. Actual coin count: %d\n", expectedCoins, G.coins);
     }
     else
     {
@@ -116,7 +116,7 @@ int main()
     {
         if (tributeRevealedCards[k] == -1)
         {
-            printf("FAIL: Tribute pile does not have 2 cards in it\n");
+            printf("TEST_CHECK_TRIBUTE_PILE_COUNT FAILED: Tribute pile does not have 2 cards in it\n");
             tributeIsFull = 0;
             break;
         }
@@ -130,7 +130,7 @@ int main()
 
     if (tributeRevealedCards[0] != gold || tributeRevealedCards[1] != tribute)
     {
-        printf("FAIL: card found in Tribute is incorrect. Expected cards found in Tribute: %d, %d.\nActual card found in Tribute:\n", gold, tribute);
+        printf("TEST CHECK_TRIBUTE_PILE_CARDS FAILED: card found in Tribute is incorrect. Expected cards found in Tribute: %d, %d.\nActual card found in Tribute:\n", gold, tribute);
         for (int m = 0; m < 2; m++)
         {
             printf("%d\n", tributeRevealedCards[m]);
