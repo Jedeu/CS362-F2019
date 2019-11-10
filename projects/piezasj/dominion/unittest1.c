@@ -148,7 +148,7 @@ int main()
 
     printf("%d out of %d tests passed for handleBaronEffect\n", numPassedTests, totalTests);
 
-    printf("######################################## END TEST: BARON ########################################\n\n");
+    printf("########################################## END TEST: BARON ########################################\n\n");
 
     return 0;
 }

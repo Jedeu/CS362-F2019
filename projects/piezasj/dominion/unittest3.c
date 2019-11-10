@@ -178,5 +178,5 @@ int main()
 
     printf("%d out of %d tests passed\n", numPassedTests, totalTests);
 
-    printf("######################################## BEGIN TEST: AMBASSADOR ########################################\n\n");
+    printf("########################################## END TEST: AMBASSADOR ########################################\n\n");
 }

@@ -143,6 +143,6 @@ int main()
 
     printf("%d out of %d tests passed\n", numPassedTests, totalTests);
 
-    printf("######################################## END TEST: TRIBUTE ########################################\n\n");
+    printf("########################################## END TEST: TRIBUTE ########################################\n\n");
 
 }

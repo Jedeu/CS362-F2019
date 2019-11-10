@@ -936,12 +936,12 @@ int handleAmbassadorEffect(int chosenCardPos, int numToDiscard, int ambassadorCa
 
 int validateMiningChoices(int cardInHand, int desiredCard)
 {
-    if (cardInHand > copper || cardInHand > gold)
+    if (cardInHand < copper || cardInHand > gold)
     {
         return 0;
     }
 
-    if (desiredCard < treasure_map || desiredCard < curse)
+    if (desiredCard > treasure_map || desiredCard < curse)
     {
         return 0;
     }
@@ -954,11 +954,11 @@ int validateMiningChoices(int cardInHand, int desiredCard)
     return 1;
 }
 
-int handleMineEffect(struct gameState *state, int currentPlayer, int cardToTrash, int desiredCard, int handPos)
+int handleMineEffect(struct gameState *state, int currentPlayer, int posCardToTrash, int desiredCard, int handPos)
 {
-    int j = state->hand[currentPlayer][cardToTrash];  //store card we will trash
+    int j = state->hand[currentPlayer][posCardToTrash];  //store card we will trash
 
-    int isValidChoice = validateMiningChoices(state->hand[currentPlayer][cardToTrash], desiredCard);
+    int isValidChoice = validateMiningChoices(state->hand[currentPlayer][posCardToTrash], desiredCard);
 
     if (!isValidChoice) {
         return -1;
