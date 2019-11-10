@@ -22,6 +22,8 @@ int main()
 			sea_hag, tribute, smithy, council_room};
     int tributeRevealedCards[2] = {-1, -1};
 
+    printf("######################################## BEGIN TEST: TRIBUTE ########################################\n");
+
     initializeGame(numPlayers, k, seed, &G);
 
     G.deckCount[nextPlayer] = 1;
@@ -140,5 +142,7 @@ int main()
     }
 
     printf("%d out of %d tests passed\n", numPassedTests, totalTests);
+
+    printf("######################################## END TEST: TRIBUTE ########################################\n\n");
 
 }

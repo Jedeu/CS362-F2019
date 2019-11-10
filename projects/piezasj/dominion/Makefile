@@ -39,5 +39,12 @@ unittest4: unittest4.c dominion.o rngs.o
 
 all: playdom player 
 
+unittestresults: unittest1 unittest2 unittest3 unittest4
+	./unittest1 &> unittestresults.out
+	./unittest2 >> unittestresults.out
+	./unittest3 >> unittestresults.out
+	./unittest4 >> unittestresults.out
+	gcov dominion.c -b -f >> unittestresults.out
+
 clean:
 	rm -rf *.o playdom.exe playdom player unittest1 unittest2 unittest3 unittest4 player.exe  *.gcov *.gcda *.gcno *.so *.out *.dSYM testDrawCard testDrawCard.exe

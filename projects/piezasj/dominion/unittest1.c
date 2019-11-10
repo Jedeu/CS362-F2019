@@ -20,6 +20,8 @@ int main()
 	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
 			sea_hag, tribute, smithy, council_room};
 
+    printf("######################################## BEGIN TEST: BARON ########################################\n");
+
 	// Test that the player gains 4 coins if they choose to discard an estate
 	initializeGame(numPlayers, k, seed, &G);
     int currentPlayerCoins = G.coins;
@@ -145,6 +147,8 @@ int main()
     
 
     printf("%d out of %d tests passed for handleBaronEffect\n", numPassedTests, totalTests);
+
+    printf("######################################## END TEST: BARON ########################################\n\n");
 
     return 0;
 }

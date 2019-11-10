@@ -22,6 +22,8 @@ int main()
 	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
 			sea_hag, tribute, smithy, council_room};
 
+    printf("######################################## BEGIN TEST: MINION ########################################\n");
+
     // Test that a player gains 2 coins from playing the minion card
     initializeGame(numPlayers, k, seed, &G);
     int currentPlayerCoins = G.coins;
@@ -115,4 +117,6 @@ int main()
     G = EmptyStruct;
 
     printf("%d out of %d tests passed\n", numPassedTests, totalTests);
+
+    printf("######################################## END TEST: MINION ########################################\n\n");
 }

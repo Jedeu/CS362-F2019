@@ -20,6 +20,8 @@ int main()
 	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
 			sea_hag, tribute, smithy, council_room};
 
+    printf("######################################## BEGIN TEST: AMBASSADOR ########################################\n");
+
     /* Test that other players gain an adventurer card 
        if the current player gives theirs up */
     initializeGame(numPlayers, k, seed, &G);
@@ -175,4 +177,6 @@ int main()
     }
 
     printf("%d out of %d tests passed\n", numPassedTests, totalTests);
+
+    printf("######################################## BEGIN TEST: AMBASSADOR ########################################\n\n");
 }
