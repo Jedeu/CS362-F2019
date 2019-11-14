@@ -761,7 +761,7 @@ int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, 
     }
     else if (discardAndRedraw)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
     {
-        discardHand(numHandCards(state), handPos, currentPlayer, state);
+        discardHand(handPos, currentPlayer, state);
 
         //draw 4
         for (int i = 0; i < 4; i++)
@@ -774,7 +774,7 @@ int handleMinionEffect(struct gameState *state, int handPos, int currentPlayer, 
         {
             if (k != currentPlayer && state->handCount[k] > 4)
             {
-                discardHand(numHandCards(state), handPos, k, state);
+                discardHand(handPos, currentPlayer, state);
 
                 //draw 4
                 for (int j = 0; j < 4; j++)
@@ -985,12 +985,12 @@ int handleMineEffect(struct gameState *state, int currentPlayer, int cardToTrash
 
 // Helper function to check if the current card in the player's hand is a specific kind of card
 int isCard(int currentCard, enum CARD card) {
-    return currentCard = card;
+    return currentCard == card;
 }
 
-void discardHand(int numCards, int handPos, int currentPlayer, struct gameState *state)
+void discardHand(int handPos, int currentPlayer, struct gameState *state)
 {
-    while(numCards > 0)
+    while(numHandCards(state) > 0)
     {
         discardCard(handPos, currentPlayer, state, 1);
     }
