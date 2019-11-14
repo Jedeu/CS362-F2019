@@ -7,6 +7,7 @@
 #include <time.h>
 
 #define CHECK_MARK "\u2713"
+static const struct gameState EmptyStruct;
 
 int main()
 {   
@@ -16,7 +17,6 @@ int main()
 	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
 			sea_hag, tribute, smithy, council_room};
     srand(time(0)); 
-    static const struct gameState EmptyStruct;
 
     for (int i = 0; i < 1000000; i++)
     {

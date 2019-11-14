@@ -21,6 +21,8 @@ int hasEstateCard(struct gameState* G, int thisPlayer)
     return 0;
 }
 
+static const struct gameState EmptyStruct;
+
 int main()
 {   
     int seed = 1000;
@@ -119,5 +121,7 @@ int main()
                 }
             }
         }
+
+        G = EmptyStruct;
     }
 }
