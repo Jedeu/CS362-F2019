@@ -16,6 +16,7 @@ int main()
 	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
 			sea_hag, tribute, smithy, council_room};
     srand(time(0)); 
+    static const struct gameState EmptyStruct;
 
     for (int i = 0; i < 1000000; i++)
     {
@@ -27,10 +28,6 @@ int main()
 
         int currentPlayerInitialCoins = G.coins;
         int currentPlayerInitialActions = G.numActions;
-        int expectedDiscardCount = G.discardCount[thisPlayer] + G.handCount[thisPlayer];
-        int expectedDiscardBothPlayers = G.discardCount[0] + G.discardCount[1] + G.handCount[0] + G.handCount[1];
-        G.discardCount[0] = 0;
-        G.discardCount[1] = 0;
         G.handCount[0] = rand() % 5 + 1;
         G.handCount[1] = rand() % 5 + 1;
         for (int j = 0; j < 2; j++)
@@ -41,6 +38,8 @@ int main()
             }
         }
 
+        int expectedDiscardCount = G.discardCount[thisPlayer] + G.handCount[thisPlayer];
+        int expectedDiscardBothPlayers = G.discardCount[0] + G.discardCount[1] + G.handCount[0] + G.handCount[1];
         int handPosition = rand() % G.handCount[thisPlayer];
 
         handleMinionEffect(&G, handPosition, thisPlayer, getTwoCoinsChoice, discardAndRedrawChoice);
@@ -61,7 +60,7 @@ int main()
             }
             else
             {   
-                printf("It increase the number of actions: %s\n", CHECK_MARK);
+                printf("It increases the number of actions: %s\n", CHECK_MARK);
             }
         }
         else if (discardAndRedrawChoice > 0)
@@ -81,6 +80,7 @@ int main()
             else
             {
                 int numDiscardedCards = G.discardCount[0] + G.discardCount[1];
+
                 if (numDiscardedCards != expectedDiscardBothPlayers)
                 {
                     printf("TEST_DISCARD_AND_REDRAW_ALL FAILED: Discard count is incorrect. Expected discard count: %d. Actual discard count: %d\n", expectedDiscardBothPlayers, numDiscardedCards);
@@ -91,6 +91,8 @@ int main()
                 }
             }
         }
+
+        G = EmptyStruct;
 
     }
 }

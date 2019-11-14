@@ -28,7 +28,10 @@ player: player.c interface.o
 randomtestcard1: randomtestcard1.c dominion.o rngs.o
 	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
 
+randomtestcard2: randomtestcard2.c dominion.o rngs.o
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+
 all: playdom player 
 
 clean:
-	rm -rf *.o playdom.exe playdom player player.exe randomtestcard1 *.gcov *.gcda *.gcno *.so *.out *.dSYM testDrawCard testDrawCard.exe
+	rm -rf *.o playdom.exe playdom player player.exe randomtestcard1 randomtestcard2 *.gcov *.gcda *.gcno *.so *.out *.dSYM testDrawCard testDrawCard.exe
