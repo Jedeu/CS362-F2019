@@ -50,11 +50,6 @@ int main()
         G.discardCount[otherPlayer] = rand() % MAX_DECK;
         G.deckCount[otherPlayer] = rand() % MAX_DECK;
 
-        for (int l = 0; l < G.handCount[otherPlayer]; l++)
-        {
-            G.hand[otherPlayer][l] = rand() % 25 + 1;
-        }
-
         int previousCoins = G.coins;
         int previousCardCount = G.handCount[otherPlayer];
 

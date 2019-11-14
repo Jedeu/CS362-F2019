@@ -43,4 +43,4 @@ randomtestresults: randomtestcard1 randomtestcard2 randomtestcard3
 all: playdom player 
 
 clean:
-	rm -rf *.o playdom.exe playdom player player.exe randomtestcard1 randomtestcard2 randomtestcard3 *.gcov *.gcda *.gcno *.so *.out *.dSYM testDrawCard testDrawCard.exe
+	rm -rf *.o playdom.exe playdom player player.exe randomtestcard1 randomtestcard2 randomtestcard3 *.gcov *.gcda *.gcno *.so *.dSYM testDrawCard testDrawCard.exe
