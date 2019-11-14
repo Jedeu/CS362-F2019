@@ -985,7 +985,7 @@ int handleMineEffect(struct gameState *state, int currentPlayer, int cardToTrash
 
 // Helper function to check if the current card in the player's hand is a specific kind of card
 int isCard(int currentCard, enum CARD card) {
-    return currentCard = card;
+    return currentCard == card;
 }
 
 void discardHand(int numCards, int handPos, int currentPlayer, struct gameState *state)
