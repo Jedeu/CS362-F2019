@@ -20,7 +20,7 @@ int main()
 	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse,
 			sea_hag, tribute, smithy, council_room};
 
-    printf("######################################## BEGIN TEST: BARON ########################################\n");
+    printf("######################################## BEGIN TEST: MINE ########################################\n");
 
     initializeGame(numPlayers, k, seed, &G);
 
@@ -29,7 +29,7 @@ int main()
 
     int expectedHandCount = G.handCount[thisPlayer] - 1;
     
-    handleMineEffect(&G, thisPlayer, 0, gold, 1);
+    cardMine(&G, 1, thisPlayer, 0, gold);
 
     if (G.handCount[thisPlayer] != expectedHandCount)
     {
@@ -53,5 +53,5 @@ int main()
 
     printf("%d out of %d tests passed\n", numPassedTests, totalTests);
 
-    printf("######################################## END TEST: BARON ##########################################\n");
+    printf("######################################## END TEST: MINE ##########################################\n");
 }

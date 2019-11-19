@@ -31,7 +31,7 @@ int main()
 
     int expectedCoins = G.coins + 2;
 
-    handleTributeEffect(&G, tributeRevealedCards, thisPlayer, nextPlayer);
+    cardTribute(&G, thisPlayer, nextPlayer, tributeRevealedCards);
 
     if(G.coins != expectedCoins)
     {
@@ -54,7 +54,7 @@ int main()
 
     int expectedCardCount = G.deckCount[nextPlayer] + 2;
     
-    handleTributeEffect(&G, tributeRevealedCards, thisPlayer, nextPlayer);
+    cardTribute(&G, thisPlayer, nextPlayer, tributeRevealedCards);
 
     if (G.handCount[nextPlayer] != expectedCardCount)
     {
@@ -88,7 +88,7 @@ int main()
     int expectedActions = G.numActions + 2;
     expectedCoins = G.coins + 2;    
 
-    handleTributeEffect(&G, tributeRevealedCards, thisPlayer, nextPlayer);
+    cardTribute(&G, thisPlayer, nextPlayer, tributeRevealedCards);
 
     if (G.numActions != expectedActions)
     {

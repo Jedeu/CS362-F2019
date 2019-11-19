@@ -39,7 +39,7 @@ int main()
 
     int expectedHandCount = G.handCount[thisPlayer] - 3;
 
-    handleAmbassadorEffect(adventurerPosition, 1, ambassadorPosition, thisPlayer, &G);
+    cardAmbassador(&G, adventurerPosition, 1, thisPlayer, ambassadorPosition);
     int cardCountOtherPlayer = G.handCount[1];
 
     if(cardCountOtherPlayer != expectedCardCountOtherPlayer)
@@ -105,11 +105,11 @@ int main()
     adventurerPosition = 0;
     ambassadorPosition = 1;
 
-    int result = handleAmbassadorEffect(adventurerPosition, -1, ambassadorPosition, thisPlayer, &G);
+    int result = cardAmbassador(&G, adventurerPosition, -1, thisPlayer, ambassadorPosition);
 
     if(result == 0)
     {
-        printf("TEST_BAD_DISCARD_INPUT FAILED: Unexpected successful return from function");
+        printf("TEST_BAD_DISCARD_INPUT FAILED: Unexpected successful return from function\n");
     }
     else
     {
@@ -126,7 +126,7 @@ int main()
     adventurerPosition = 0;
     ambassadorPosition = 1;
 
-    result = handleAmbassadorEffect(adventurerPosition, 1, ambassadorPosition, thisPlayer, &G);
+    result = cardAmbassador(&G, adventurerPosition, 1, thisPlayer, ambassadorPosition);
 
     if(result == 0)
     {
@@ -145,7 +145,7 @@ int main()
     G.hand[thisPlayer][0] = adventurer;
     G.hand[thisPlayer][1] = ambassador;
 
-    result = handleAmbassadorEffect(adventurerPosition, 0, ambassadorPosition, thisPlayer, &G);
+    result = cardAmbassador(&G, adventurerPosition, 0, thisPlayer, ambassadorPosition);
 
     if(result == 0)
     {
@@ -164,7 +164,7 @@ int main()
     G.hand[thisPlayer][1] = ambassador;
     ambassadorPosition = 1;
 
-    result = handleAmbassadorEffect(ambassadorPosition, 0, ambassadorPosition, thisPlayer, &G);
+    result = cardAmbassador(&G, ambassadorPosition, 0, thisPlayer, ambassadorPosition);
 
     if(result == 0)
     {

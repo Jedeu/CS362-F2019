@@ -53,7 +53,7 @@ int main()
         int previousCoins = G.coins;
         int previousCardCount = G.handCount[otherPlayer];
 
-        handleTributeEffect(&G, tributeRevealedCards, thisPlayer, otherPlayer);
+        cardTribute(&G, thisPlayer, otherPlayer, tributeRevealedCards);
 
         if (hasCard(copper, tributeRevealedCards) || hasCard(silver, tributeRevealedCards) || hasCard(gold, tributeRevealedCards))
         {
