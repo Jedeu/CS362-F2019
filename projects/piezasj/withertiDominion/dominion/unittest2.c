@@ -29,7 +29,7 @@ int main()
     int currentPlayerCoins = G.coins;
     G.hand[thisPlayer][2] = minion;
 
-    handleMinionEffect(&G, G.hand[thisPlayer][2], thisPlayer, TRUE, FALSE);
+    cardMinion(&G, TRUE, FALSE, G.hand[thisPlayer][2], thisPlayer);
 
     if(G.coins != currentPlayerCoins + 2)
     {
@@ -48,7 +48,7 @@ int main()
     int numActionsBefore = G.numActions;
     G.hand[thisPlayer][2] = minion;
 
-    handleMinionEffect(&G, G.hand[thisPlayer][2], thisPlayer, TRUE, FALSE);
+    cardMinion(&G, TRUE, FALSE, G.hand[thisPlayer][2], thisPlayer);
 
     if(G.numActions != numActionsBefore + 1)
     {
@@ -72,7 +72,7 @@ int main()
 
     int expectedDiscardCount = G.discardCount[0] + G.handCount[0];
 
-    handleMinionEffect(&G, G.hand[thisPlayer][0], thisPlayer, FALSE, TRUE);
+    cardMinion(&G, FALSE, TRUE, G.hand[thisPlayer][0], thisPlayer);
 
     int numDiscardedCards = G.discardCount[0];
     
@@ -100,7 +100,7 @@ int main()
 
     expectedDiscardCount = G.discardCount[0] + G.discardCount[1] + G.handCount[0] + G.handCount[1];
 
-    handleMinionEffect(&G, G.hand[thisPlayer][0], thisPlayer, FALSE, TRUE);
+    cardMinion(&G, FALSE, TRUE, G.hand[thisPlayer][0], thisPlayer);
 
     numDiscardedCards = G.discardCount[0] + G.discardCount[1];
     

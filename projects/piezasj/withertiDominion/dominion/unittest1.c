@@ -29,7 +29,7 @@ int main()
     int currentPlayerCardCount = G.handCount[thisPlayer];
     int expectedCardCount = G.handCount[thisPlayer] - 1;
     G.hand[thisPlayer][0] = estate;
-    handleBaronEffect(discardEstate, &G, thisPlayer);
+    cardBaron(&G, thisPlayer, discardEstate);
 
     if(G.coins != currentPlayerCoins + 4)
     {
@@ -60,7 +60,7 @@ int main()
     int thisPlayerNumCards = G.handCount[thisPlayer];
     expectedCardCount = thisPlayerNumCards + 1;
 
-    handleBaronEffect(discardEstate, &G, thisPlayer);
+    cardBaron(&G, thisPlayer, discardEstate);
 
     if(G.handCount[thisPlayer] != expectedCardCount)
     {
@@ -102,7 +102,7 @@ int main()
         }
     }
 
-    handleBaronEffect(discardEstate, &G, thisPlayer);
+    cardBaron(&G, thisPlayer, discardEstate);
 
     if (thisPlayerNumCards != expectedCardCount)
     {
@@ -133,7 +133,7 @@ int main()
 
     int expectedHandCount = G.handCount[thisPlayer];
 
-    handleBaronEffect(discardEstate, &G, thisPlayer);
+    cardBaron(&G, thisPlayer, discardEstate);
 
     if (G.handCount[thisPlayer] != expectedHandCount)
     {
@@ -146,7 +146,7 @@ int main()
     }
     
 
-    printf("%d out of %d tests passed for handleBaronEffect\n", numPassedTests, totalTests);
+    printf("%d out of %d tests passed for cardBaron\n", numPassedTests, totalTests);
 
     printf("########################################## END TEST: BARON ########################################\n\n");
 

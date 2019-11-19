@@ -47,7 +47,7 @@ int main()
         int beginningPlayerCoins = G.coins;
         int beginningPlayerCardCount = G.handCount[thisPlayer];
 
-        handleBaronEffect(discardEstate, &G, thisPlayer);
+        cardBaron(&G, thisPlayer, discardEstate);
 
         if (discardEstate > 0)
         {

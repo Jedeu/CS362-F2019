@@ -1160,6 +1160,7 @@ int cardBaron(struct gameState *state, const int currentPlayer, const int choice
                 }
                 state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
                 state->handCount[currentPlayer]--;
+                card_not_discarded = 0;
             }
             else if (p > state->handCount[currentPlayer]) {
                 if(DEBUG) {
@@ -1174,6 +1175,7 @@ int cardBaron(struct gameState *state, const int currentPlayer, const int choice
                         isGameOver(state);
                     }
                 }
+                card_not_discarded = 0;
             }
 
             else {
