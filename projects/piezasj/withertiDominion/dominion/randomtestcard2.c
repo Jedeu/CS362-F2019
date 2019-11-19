@@ -42,7 +42,7 @@ int main()
         int expectedDiscardBothPlayers = G.discardCount[0] + G.discardCount[1] + G.handCount[0] + G.handCount[1];
         int handPosition = rand() % G.handCount[thisPlayer];
 
-        handleMinionEffect(&G, handPosition, thisPlayer, getTwoCoinsChoice, discardAndRedrawChoice);
+        cardMinion(&G, getTwoCoinsChoice, discardAndRedrawChoice, handPosition, thisPlayer);
 
         if (getTwoCoinsChoice > 0)
         {
